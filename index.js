@@ -8,7 +8,7 @@ const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname + 'dist/profile-compare'));
+app.use(express.static(__dirname + '/dist/profileCompare'));
 
 app.listen(port, function () {
     console.log("Server running");
@@ -16,5 +16,5 @@ app.listen(port, function () {
 
 app.use('/', user); //mongo operations belong here!
 app.get('*', function(req,res,next){
-    res.send(path.join(__dirname + '/dist/profile-compare/index.html'));
+    res.send(path.join(__dirname + '/dist/profileCompare/index.html'));
 });
