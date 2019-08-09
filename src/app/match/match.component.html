@@ -1,0 +1,51 @@
+<div class="header">
+  <img src="assets/matcher.png" alt="Matcher" id="banner">
+  <img src="assets/matcher2.png" alt="Matcher" id="banner2">
+</div>
+<div class="waves">
+  <div class="square"></div>
+</div>
+<br><br>
+<div class="row">
+  <div class="col-sm-6" style="text-align: center"><h3>Sample CSV</h3><br></div>
+  <div class="col-sm-6" style="text-align: center"><h3>Test CSV</h3><br></div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <table class="table table-hover">
+      <tr>
+        <th *ngFor="let head of columns;">{{head}}</th>
+      </tr>
+      <tr *ngFor="let record of records;">
+        <td *ngFor="let head of columns;">{{ record[head] }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-sm-6">
+    <table class="table table-hover">
+      <tr>
+        <th *ngFor="let head of columns;">{{head}}</th>
+      </tr>
+      <tr *ngFor="let record of testRecords;">
+        <td *ngFor="let head of columns;">{{ record[head] }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row" style="text-align: center;">
+  <div class="col-sm-12"><h3>Result</h3></div>
+</div>
+<div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    <table class="table table-hover">
+      <tr>
+        <th *ngFor="let head of resColumns;">{{head}}</th>
+      </tr>
+      <tr *ngFor="let record of result;">
+        <td *ngFor="let head of resColumns;">{{ record[head] }}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-sm-3"></div>
+</div>
