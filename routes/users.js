@@ -16,17 +16,15 @@ function addSample() {
     const csvpath = './uploads/csv1.csv';
     csv().fromFile(csvpath).then((json) => {
         console.log(json);
-        MongoClient.connect(dbUrl, { useNewUrlParser: true }).then( (db) => {
-            // if (err) throw err;
-            var dbo = db.db('profile');
+        MongoClient.connect(dbUrl, { useNewUrlParser: true }, (err, db) => {
+            if (err) throw err;
+            var dbo = db.db('matcher');
             dbo.collection('sample').drop();
             dbo.collection('sample').insertMany(json, (err, res) => {
-                // if (err) throw err;
+                if (err) throw err;
                 console.log("Inserted " + res.insertedCount);
                 db.close();
             });
-        }).catch( (err) => {
-            console.log("Error ",err);
         });
     });
 }
@@ -34,17 +32,15 @@ function addTest() {
     const csvpath = './uploads/csv2.csv';
     csv().fromFile(csvpath).then((json) => {
         console.log(json);
-        MongoClient.connect(dbUrl, { useNewUrlParser: true }).then( (err, db) => {
+        MongoClient.connect(dbUrl, { useNewUrlParser: true },  (err, db) => {
             if (err) throw err;
-            var dbo = db.db('profile');
+            var dbo = db.db('matcher');
             dbo.collection('test').drop();
             dbo.collection('test').insertMany(json, (err, res) => {
                 if (err) throw err;
                 console.log("Inserted " + res.insertedCount);
                 db.close();
             });
-        }).catch((err)=>{
-            console.log("Error", err);
         });
     });
 }
@@ -111,7 +107,7 @@ router.post('/result', function (req, res, next) {
 router.get('/sample', function (req, res, next) {
     MongoClient.connect(dbUrl, { useNewUrlParser: true }, (err, db) => {
         if (err) throw err;
-        var dbo = db.db('profile');
+        var dbo = db.db('matcher');
         dbo.collection('sample').find({}).toArray(function (err, docs) {
             console.log(docs);
             res.json(docs);
@@ -122,7 +118,7 @@ router.get('/sample', function (req, res, next) {
 router.get('/test', function (req, res, next) {
     MongoClient.connect(dbUrl, { useNewUrlParser: true }, (err, db) => {
         if (err) throw err;
-        var dbo = db.db('profile');
+        var dbo = db.db('matcher');
         dbo.collection('test').find({}).toArray(function (err, docs) {
             console.log(docs);
             res.json(docs);
