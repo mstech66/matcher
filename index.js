@@ -4,7 +4,7 @@ const path = require('path');
 const cors = require("cors");
 const bodyParser = require('body-parser');
 var user = require('./routes/users.js');
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4200;
 
 app.use(cors());
 app.use(bodyParser.json());

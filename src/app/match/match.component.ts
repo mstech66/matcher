@@ -34,23 +34,25 @@ export class MatchComponent implements OnInit {
       };
       for (var i = 2; i < this.columns.length; i++) {
         var currentColumn = this.columns[i];
-        var totalPer = 0;
+        var totalScore = 0;
         this.testRecords.forEach(test => {
-          var sample = record[currentColumn].split(',');
-          var test1 = test[currentColumn].split(',');
-          var test1Length = test1.length;
-          var count = 0;
-          for (var x of sample) {
-            if (test1.includes(x)) {
-              count++;
-              var index = test1.indexOf(x);
-              test1.splice(index, 1);
+          var sampleAllels = record[currentColumn].split(',');
+          var testAllels = test[currentColumn].split(',');
+          var totalTestAllels = testAllels.length;
+          var totalSampleAllels = sampleAllels.length;
+          var totalMatchedAllels = 0;
+          for (var x of sampleAllels) {
+            if (testAllels.includes(x)) {
+              totalMatchedAllels++;
+              var index = testAllels.indexOf(x);
+              testAllels.splice(index, 1);
             }
           }
-          var perc = (count / test1Length) * 100;
-          totalPer += perc;
+          console.log(`totalMatchedAllels are ${totalMatchedAllels} totalSampleAllels are ${totalSampleAllels} and totalTestAllels are ${totalTestAllels}`)
+          var score = 2 * totalMatchedAllels / (totalSampleAllels + totalTestAllels);
+          totalScore += score;
         });
-        temp[currentColumn] = totalPer;
+        temp[currentColumn] = totalScore * 100;
       }
       this.result.push(temp);
     });
@@ -60,9 +62,8 @@ export class MatchComponent implements OnInit {
         var temp = this.columns[j];
         sum += y[temp];
       }
-      y['Total'] = sum;
+      y['Total'] = `${sum / this.columns.length}%`;
     }
-    console.log("U got that?...", this.result);
     // this.service.sendResult(this.result);
   }
 
@@ -77,6 +78,7 @@ export class MatchComponent implements OnInit {
       console.log(this.columns, this.totalCols, this.resColumns);
       // this.createProps();
     });
+
     this.service.getTestData().subscribe(data => {
       console.log('Test Data: ', data);
       this.testRecords = data;

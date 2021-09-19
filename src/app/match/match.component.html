@@ -6,12 +6,8 @@
   <div class="square"></div>
 </div>
 <br><br>
-<div class="row">
-  <div class="col-sm-6" style="text-align: center"><h3>Sample CSV</h3><br></div>
-  <div class="col-sm-6" style="text-align: center"><h3>Test CSV</h3><br></div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
+<!-- <div class="row">
+  <div class="col-sm-12">
     <table class="table table-hover">
       <tr>
         <th *ngFor="let head of columns;">{{head}}</th>
@@ -21,7 +17,9 @@
       </tr>
     </table>
   </div>
-  <div class="col-sm-6">
+</div>
+<div class="row">
+  <div class="col-sm-12">
     <table class="table table-hover">
       <tr>
         <th *ngFor="let head of columns;">{{head}}</th>
@@ -31,13 +29,12 @@
       </tr>
     </table>
   </div>
-</div>
+</div> -->
 <div class="row" style="text-align: center;">
   <div class="col-sm-12"><h3>Result</h3></div>
 </div>
-<div class="row">
-  <div class="col-sm-3"></div>
-  <div class="col-sm-6">
+<div class="row" id="resultRow">
+  <div class="col-sm-12">
     <table class="table table-hover">
       <tr>
         <th *ngFor="let head of resColumns;">{{head}}</th>
@@ -47,5 +44,4 @@
       </tr>
     </table>
   </div>
-  <div class="col-sm-3"></div>
 </div>

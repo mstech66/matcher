@@ -11,8 +11,8 @@ export class HomeComponent implements OnInit {
 
   file1: File = null;
   file2: File = null;
-  file1Info = 'Upload Sample CSV Here';
-  file2Info = 'Upload Test CSV Here';
+  file1Info = 'Upload Reference CSV Here';
+  file2Info = 'Upload Query CSV Here';
   disabled1 = false;
   disabled2 = false;
   showOrHide = true;

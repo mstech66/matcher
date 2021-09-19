@@ -10,13 +10,13 @@ const router = express.Router();
 var multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-const dbUrl = 'mongodb://manthan:manthan66@ds161112.mlab.com:61112/matcher';
+const dbUrl = 'mongodb+srv://manthan66:manthan123@cluster0.ty2uj.mongodb.net/matcher?retryWrites=true&w=majority';
 
 function addSample() {
     const csvpath = './uploads/csv1.csv';
     csv().fromFile(csvpath).then((json) => {
         console.log(json);
-        MongoClient.connect(dbUrl, { useNewUrlParser: true }, (err, db) => {
+        MongoClient.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
             if (err) throw err;
             var dbo = db.db('matcher');
             dbo.collection('sample').drop();
@@ -32,7 +32,7 @@ function addTest() {
     const csvpath = './uploads/csv2.csv';
     csv().fromFile(csvpath).then((json) => {
         console.log(json);
-        MongoClient.connect(dbUrl, { useNewUrlParser: true },  (err, db) => {
+        MongoClient.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true },  (err, db) => {
             if (err) throw err;
             var dbo = db.db('matcher');
             dbo.collection('test').drop();
