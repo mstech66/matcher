@@ -1,0 +1,31 @@
+<mat-progress-bar mode="query" id="query" [hidden]="showOrHide"></mat-progress-bar>
+<div class="body">
+  <div class="header">
+      <img src="assets/matcher.png" alt="Matcher" id="banner">
+      <img src="assets/matcher2.png" alt="Matcher" id="banner2">
+  </div>
+  <div class="waves">
+      <div class="square"></div>
+  </div>
+  <br><br>
+  <form (submit)="submitForm($event)" id="myForm">
+    <div class="row" style="width: 100%">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <div class="uploads" appDragDrop (click)="csv1.click()" (fileDropped)="onFileChangeOne($event)" style="text-align: center; line-height: 140px; vertical-align: middle;">
+         <b><span class="info" style="margin: 0 auto;">{{ file1Info }}</span></b>
+          <input hidden type="file" name="csv1" id="csv1" #csv1 (change)="onFileChangeOne($event.target.files)">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="uploads" appDragDrop (click)="csv2.click()" (fileDropped)="onFileChangeTwo($event)" style="text-align: center; line-height: 140px; vertical-align: middle;">
+            <b><span class="info" style="margin: 0 auto;">{{ file2Info }}</span></b>
+          <input type="file" name="csv2" id="csv2" #csv2 (change)="onFileChangeTwo($event.target.files)" hidden>
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <br>
+    <input type="submit" value="Submit" class="btn myButton">
+  </form>
+</div>
