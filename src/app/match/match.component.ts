@@ -18,13 +18,11 @@ export class MatchComponent implements OnInit {
 
   constructor(private service: TinkerService) { }
 
-  // createProps() {
-  //   this.records.forEach(value => {
-  //     this.columns.forEach(headers => {
-  //       console.log(value[headers]);
-  //     });
-  //   });
-  // }
+  sortArrayByValue(arr, p) {
+    return arr.sort(function(a,b) {
+      return (a[p] > b[p]) ? -1 : (a[p] < b[p]) ? 1 : 0;
+    });
+  }
 
   findResults() {
     this.records.forEach(record => {
@@ -36,34 +34,40 @@ export class MatchComponent implements OnInit {
         var currentColumn = this.columns[i];
         var totalScore = 0;
         this.testRecords.forEach(test => {
-          var sampleAllels = record[currentColumn].split(',');
-          var testAllels = test[currentColumn].split(',');
-          var totalTestAllels = testAllels.length;
-          var totalSampleAllels = sampleAllels.length;
+          var controlAllels = record[currentColumn].split(','); //15
+          var mixtureAllels = test[currentColumn].split(','); //15,16,17,18
+          var totalMixtureAllels = mixtureAllels.length; //4
+          var totalControlAllels = controlAllels.length; //1
           var totalMatchedAllels = 0;
-          for (var x of sampleAllels) {
-            if (testAllels.includes(x)) {
-              totalMatchedAllels++;
-              var index = testAllels.indexOf(x);
-              testAllels.splice(index, 1);
+          for (var x of controlAllels) {
+            if (mixtureAllels.includes(x)) {
+              totalMatchedAllels++; //1
+              var index = mixtureAllels.indexOf(x);
+              mixtureAllels.splice(index, 1);
             }
           }
-          console.log(`totalMatchedAllels are ${totalMatchedAllels} totalSampleAllels are ${totalSampleAllels} and totalTestAllels are ${totalTestAllels}`)
-          var score = 2 * totalMatchedAllels / (totalSampleAllels + totalTestAllels);
+          console.log(`totalMatchedAllels are ${totalMatchedAllels} totalSampleAllels are ${totalControlAllels} and totalTestAllels are ${totalMixtureAllels}`)
+          //var score = 2 * totalMatchedAllels / (totalControlAllels + totalMixtureAllels); // 2 * 1 / 1+4 
+          var score = (totalMatchedAllels / totalControlAllels)
           totalScore += score;
         });
-        temp[currentColumn] = totalScore * 100;
+        temp[currentColumn] = Math.round((totalScore * 100) * 100) / 100;
       }
       this.result.push(temp);
     });
     for(var y of this.result){
       var sum = 0;
+      console.log(this.columns[2])
       for(var j=2; j<this.columns.length;j++){
         var temp = this.columns[j];
         sum += y[temp];
       }
-      y['Total'] = `${sum / this.columns.length}%`;
+      var totalColumn = this.columns.length - 2;
+      console.log(sum + ' ' + totalColumn)
+      y['Total'] = Math.round((sum / totalColumn) * 100) / 100;
     }
+    this.result = this.sortArrayByValue(this.result, 'Total')
+
     // this.service.sendResult(this.result);
   }
 
@@ -72,7 +76,7 @@ export class MatchComponent implements OnInit {
       console.log('Sample Data: ', data);
       this.records = data;
       this.columns = Object.keys(data[0]);
-      this.resColumns = Object.keys(data[0]);
+      this.resColumns = Object.keys(data[0]).slice(1);
       this.resColumns.push('Total');
       this.totalCols = this.columns.length;
       console.log(this.columns, this.totalCols, this.resColumns);
@@ -87,5 +91,4 @@ export class MatchComponent implements OnInit {
       this.findResults();
     }, 5000)
   }
-
 }

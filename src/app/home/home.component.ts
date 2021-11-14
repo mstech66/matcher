@@ -11,8 +11,8 @@ export class HomeComponent implements OnInit {
 
   file1: File = null;
   file2: File = null;
-  file1Info = 'Upload Reference CSV Here';
-  file2Info = 'Upload Query CSV Here';
+  file1Info = 'Upload Control Here';
+  file2Info = 'Upload Sample (Mixture) Here';
   disabled1 = false;
   disabled2 = false;
   showOrHide = true;
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   onFileChangeOne(event) {
     // this.file1 = event.target.files[0] as File;
     this.file1 = event[0] as File;
-    this.file1Info = 'Sample CSV: ' + this.file1.name;
+    this.file1Info = 'Control Profiles: ' + this.file1.name;
     console.log('onFileChangeOne Event...', event);
     console.log('onFileChangeOne...', this.file1);
   }
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   onFileChangeTwo(event) {
     // this.file2 = event.target.files[0] as File;
     this.file2 = event[0] as File;
-    this.file2Info = 'Test CSV: ' + this.file2.name;
+    this.file2Info = 'Sample (Mixture) Profiles: ' + this.file2.name;
     console.log('onFileChangeTwo Event...', event);
     console.log('onFileChangeTwo...', this.file2);
   }

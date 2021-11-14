@@ -17,27 +17,28 @@
       </tr>
     </table>
   </div>
-</div>
-<div class="row">
+</div> -->
+<!-- <div class="row">
   <div class="col-sm-12">
     <table class="table table-hover">
       <tr>
-        <th *ngFor="let head of columns;">{{head}}</th>
+        <th *ngFor="let head of resColumns;">{{head}}</th>
       </tr>
       <tr *ngFor="let record of testRecords;">
-        <td *ngFor="let head of columns;">{{ record[head] }}</td>
+        <td *ngFor="let head of resColumns;">{{ record[head] }}</td>
       </tr>
     </table>
   </div>
 </div> -->
-<div class="row" style="text-align: center;">
-  <div class="col-sm-12"><h3>Result</h3></div>
+<br>
+<div class="row" style="text-align: left;">
+  <div class="col-sm-12"><h4>Mixture Profiles</h4></div>
 </div>
 <div class="row" id="resultRow">
   <div class="col-sm-12">
     <table class="table table-hover">
       <tr>
-        <th *ngFor="let head of resColumns;">{{head}}</th>
+        <th *ngFor="let head of resColumns;" class="colHeader">{{head}}</th>
       </tr>
       <tr *ngFor="let record of result;">
         <td *ngFor="let head of resColumns;">{{ record[head] }}</td>
