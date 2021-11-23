@@ -26,10 +26,11 @@ export class MatchComponent implements OnInit {
 
   findResults() {
     this.records.forEach(record => {
+      let nameCol = this.columns[1]
       var temp = {
-        '_id': record['_id'],
-        'Name': record['Name']
+        '_id': record[this.columns[0]]
       };
+      temp[nameCol] = record[nameCol];
       for (var i = 2; i < this.columns.length; i++) {
         var currentColumn = this.columns[i];
         var totalScore = 0;
@@ -67,7 +68,7 @@ export class MatchComponent implements OnInit {
       y['Total'] = Math.round((sum / totalColumn) * 100) / 100;
     }
     this.result = this.sortArrayByValue(this.result, 'Total')
-
+    console.log(this.result)
     // this.service.sendResult(this.result);
   }
 
