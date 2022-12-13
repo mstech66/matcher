@@ -8,11 +8,11 @@ import { TinkerService } from '../tinker.service';
 })
 export class MatchComponent implements OnInit {
 
-  records = null;
+  controlRecords = null;
   columns = null;
   totalCols = null; // for calculations total no of columns...
   props = new Array();
-  testRecords = null;
+  sampleRecords = null;
   result = [];
   resColumns = null;
 
@@ -25,7 +25,7 @@ export class MatchComponent implements OnInit {
   }
 
   findResults() {
-    this.records.forEach(record => {
+    this.controlRecords.forEach(record => {
       let nameCol = this.columns[1]
       var temp = {
         '_id': record[this.columns[0]]
@@ -34,7 +34,7 @@ export class MatchComponent implements OnInit {
       for (var i = 2; i < this.columns.length; i++) {
         var currentColumn = this.columns[i];
         var totalScore = 0;
-        this.testRecords.forEach(test => {
+        this.sampleRecords.forEach(test => {
           var controlAllels = record[currentColumn].split(','); //15
           var mixtureAllels = test[currentColumn].split(','); //15,16,17,18
           var totalMixtureAllels = mixtureAllels.length; //4
@@ -75,7 +75,7 @@ export class MatchComponent implements OnInit {
   ngOnInit() {
     this.service.getSampleData().subscribe(data => {
       console.log('Sample Data: ', data);
-      this.records = data;
+      this.controlRecords = data;
       this.columns = Object.keys(data[0]);
       this.resColumns = Object.keys(data[0]).slice(1);
       this.resColumns.push('Total');
@@ -86,7 +86,7 @@ export class MatchComponent implements OnInit {
 
     this.service.getTestData().subscribe(data => {
       console.log('Test Data: ', data);
-      this.testRecords = data;
+      this.sampleRecords = data;
     });
     setTimeout(() => {
       this.findResults();
