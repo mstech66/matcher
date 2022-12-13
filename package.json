@@ -14,8 +14,8 @@
     "electron-build": "ng build --prod && electron ."
   },
   "engines": {
-    "node": "~10.16.2",
-    "npm": "~6.10.2"
+    "node": "~16.5.1",
+    "npm": "~8.12.2"
   },
   "private": true,
   "dependencies": {
