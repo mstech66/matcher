@@ -11,8 +11,7 @@
     "e2e": "ng e2e",
     "postinstall": "ng build --aot --prod",
     "electron": "electron .",
-    "electron-build": "ng build --prod && electron .",
-    "vercel-build": "node index.js"
+    "electron-build": "ng build --prod && electron ."
   },
   "engines": {
     "node": "~16.5.1",
